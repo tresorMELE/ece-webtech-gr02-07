@@ -10,7 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/tresorMELE/ece-webtech-gr02-07.git"
   },
-  "author": "Tresoe MELE MBE, Thomas LE TALLEC",
+  "author": "Tresor MELE MBE",
+  "contributors" : ["Thomas LE TALLEC"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tresorMELE/ece-webtech-gr02-07/issues"
