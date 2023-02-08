@@ -11,10 +11,15 @@
     "url": "git+https://github.com/tresorMELE/ece-webtech-gr02-07.git"
   },
   "author": "Tresor MELE MBE",
-  "contributors" : ["Thomas LE TALLEC"],
+  "contributors": [
+    "Thomas LE TALLEC"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tresorMELE/ece-webtech-gr02-07/issues"
   },
-  "homepage": "https://github.com/tresorMELE/ece-webtech-gr02-07#readme"
+  "homepage": "https://github.com/tresorMELE/ece-webtech-gr02-07#readme",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
 }
