@@ -1,0 +1,19 @@
+{
+  "name": "ece-webtech-gr02-07",
+  "version": "1.0.0",
+  "description": "Projet de création d'un site react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tresorMELE/ece-webtech-gr02-07.git"
+  },
+  "author": "Tresoe MELE MBE, Thomas LE TALLEC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tresorMELE/ece-webtech-gr02-07/issues"
+  },
+  "homepage": "https://github.com/tresorMELE/ece-webtech-gr02-07#readme"
+}
