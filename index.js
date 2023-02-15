@@ -1,38 +1,71 @@
 const http = require('http')
 const url = require('url')
-const qs = require('querystring')
+const fs = require('fs')
+const path = require('path')
 
-const serverHandle = function (req, res) {
-    const route = url.parse(req.url)
-    const path = route.pathname
-    const params = qs.parse(route.query)
+const server = http.createServer(function(req, res) {
+  const route = url.parse(req.url)
+  const pathname = route.pathname
 
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-
-    if (path === '/' ) {
-        res.write("If you add \"hello?<name>\" in the path, it will return hello <name>, but if it's our names it will introduce ourselves")
+  if (pathname === '/') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' })
+    res.write("If you add \"hello?<name>\" in the path, it will return hello <name>, but if it's our names it will introduce ourselves")
+    res.end()
+  }
+  else if (pathname === '/hello') {
+    const name = url.parse(req.url, true).query.name
+    if (!name) {
+      res.writeHead(400, { 'Content-Type': 'text/plain' })
+      res.write('Missing name parameter')
+      res.end()
     }
-    else if (path === '/hello' && 'name' in params) {
-        if(params['name'] === 'tresor'){
-            res.write('Hello my name is Tresor')
-        }
-        else if(params['name'] === 'thomas'){
-            res.write('Hello my name is Thomas')
-        }
-        else {
-            res.write('Hello ' + params['name'])
-        }
+    else if (name === 'tresor') {
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.write('Hello my name is Tresor')
+      res.end()
     }
-    else{
-        res.write('404, not found')
+    else if (name === 'thomas') {
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.write('Hello my name is Thomas')
+      res.end()
     }
+    else {
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.write('Hello ' + name)
+      res.end()
+    }
+  }
+  else if (pathname === '/about') {
+    const filePath = path.join(__dirname, 'content', 'about.json')
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+      if (err) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' })
+        res.write('404 Not Found')
+        res.end()
+      }
+      else {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+          if (err) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' })
+            res.write('500 Internal Server Error')
+            res.end()
+          }
+          else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.write(data)
+            res.end()
+          }
+        })
+      }
+    })
+  }
+  else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' })
+    res.write('404 Not Found')
+    res.end()
+  }
+})
 
-    res.end();
-}
-
-
-const server = http.createServer(serverHandle);
-server.listen(8080)
-
-
-
+server.listen(8080, () => {
+  console.log('Server is running on http://localhost:8080')
+})
