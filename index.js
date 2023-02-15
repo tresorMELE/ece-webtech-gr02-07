@@ -1,7 +1,6 @@
-// Import a module
 const http = require('http')
+const url = require('url')
 
-// Define a string constant concatenating strings
 const content = '<!DOCTYPE html>' +
     '<html lang="fr">' +
     '    <head>' +
@@ -14,10 +13,17 @@ const content = '<!DOCTYPE html>' +
     '</html>'
 
 const serverHandle = function (req, res) {
+    const path = url.parse(req.url).pathname;
+    console.log(path);
+
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(content);
+    res.write(content)
+    res.write("This is your path : " + path);
     res.end();
 }
 
 const server = http.createServer(serverHandle);
 server.listen(8080)
+
+
+
