@@ -9,10 +9,22 @@ const serverHandle = function (req, res) {
 
     res.writeHead(200, {'Content-Type': 'text/plain'});
 
-    if (path === '/hello' && 'name' in params) {
-        res.write('Hello ' + params['name'])
-    } else {
-        res.write('Hello anonymous')
+    if (path === '/' ) {
+        res.write("If you add \"hello?<name>\" in the path, it will return hello <name>, but if it's our names it will introduce ourselves")
+    }
+    else if (path === '/hello' && 'name' in params) {
+        if(params['name'] === 'tresor'){
+            res.write('Hello my name is Tresor')
+        }
+        else if(params['name'] === 'thomas'){
+            res.write('Hello my name is Thomas')
+        }
+        else {
+            res.write('Hello ' + params['name'])
+        }
+    }
+    else{
+        res.write('404, not found')
     }
 
     res.end();
