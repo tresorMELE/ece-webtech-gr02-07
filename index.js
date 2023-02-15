@@ -46,7 +46,7 @@ const server = http.createServer(function(req, res) {
         res.write('404 Not Found')
         res.end()
       }
-      else {
+      else {                                                                        
         fs.readFile(filePath, 'utf8', (err, data) => {
           if (err) {
             res.writeHead(500, { 'Content-Type': 'text/plain' })
