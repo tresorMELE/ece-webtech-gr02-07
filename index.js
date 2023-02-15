@@ -2,17 +2,20 @@ const http = require('http')
 const url = require('url')
 const fs = require('fs')
 const path = require('path')
+const qs = require('querystring')
 
 const server = http.createServer(function(req, res) {
   const route = url.parse(req.url)
   const pathname = route.pathname
+  const paths = route.pathname.split('/')
+  const params = qs.parse(route.query)
 
   if (pathname === '/') {
     res.writeHead(200, { 'Content-Type': 'text/plain' })
     res.write("If you add \"hello?<name>\" in the path, it will return hello <name>, but if it's our names it will introduce ourselves")
     res.end()
   }
-  else if (pathname === '/hello') {
+  else if (pathname === '/hello' && 'name' in params) {
     const name = url.parse(req.url, true).query.name
     if (!name) {
       res.writeHead(400, { 'Content-Type': 'text/plain' })
@@ -35,8 +38,8 @@ const server = http.createServer(function(req, res) {
       res.end()
     }
   }
-  else if (pathname === '/about') {
-    const filePath = path.join(__dirname, 'content', 'about.json')
+  else if (paths[1] === 'content') {
+    const filePath = path.join(__dirname, paths[1], paths[2] + ".json")
     fs.access(filePath, fs.constants.F_OK, (err) => {
       if (err) {
         res.writeHead(404, { 'Content-Type': 'text/plain' })
