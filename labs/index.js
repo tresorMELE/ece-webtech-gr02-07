@@ -77,7 +77,7 @@ server.listen(8080, () => {
 })
 
 
-app.set('port', 3000)
+app.set('port', 3001)
 
 app.get('/articles', (req, res) => {
   res.send(JSON.stringify(db.articles, null, 2))
