@@ -3,6 +3,9 @@ const url = require('url')
 const fs = require('fs')
 const path = require('path')
 const qs = require('querystring')
+const db = require('./db.js')
+const express = require('express')
+const app = express()
 
 const server = http.createServer(function(req, res) {
   const route = url.parse(req.url)
@@ -72,3 +75,69 @@ const server = http.createServer(function(req, res) {
 server.listen(8080, () => {
   console.log('Server is running on http://localhost:8080')
 })
+
+
+app.set('port', 3000)
+
+app.get('/articles', (req, res) => {
+  res.send(JSON.stringify(db.articles, null, 2))
+  res.end()
+})
+
+app.post('/articles', (req, res) => {
+    const article =
+        {
+            id: '6ec0bd7f-11c0-43da-975e-9kdlz8zd32b',
+            title: 'My second article',
+            content: 'Content of the second article.',
+            date: '10/10/2022',
+            author: 'John'
+        }
+    db.articles.push(article);
+    res.send("New article added")
+    res.end()
+})
+
+app.get('/articles/:articleId', (req, res) => {
+    const article = db.articles.find( article => article.id === req.params.articleId)
+    res.send(JSON.stringify(article, null, 2))
+    res.end()
+})
+
+app.get('/articles/:articleId/comments', (req, res) => {
+    const comment = db.comments.find( comment => comment.articleId === req.params.articleId)
+    console.log(typeof comment)
+    console.log(Object.keys(comment).length / 5)
+    if (Object.keys(comment).length / 5 > 1){
+        comment.forEach(c => res.send(c.content))
+    }
+    else{
+        res.send(comment)
+    }
+    res.end()
+})
+
+app.post('/articles/:articleId/comments', (req, res) => {
+    const comment =
+        {
+            id: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3deb6d',
+            timestamp: 1664835049,
+            content: 'Content of the second comment.',
+            articleId: req.params.articleId,
+            author: 'John'
+        }
+    db.comments.push(comment);
+    res.send("New comment added")
+    res.end()
+})
+app.get('/articles/:articleId/comments/:commentId', (req, res) => {
+  const comment = db.comments.find( comment => comment.id === req.params.commentId && comment.articleId === req.params.articleId)
+  res.send(comment)
+  res.end()
+})
+
+
+app.listen(
+    app.get('port'),
+    () => console.log(`server listening on ${app.get('port')}`)
+)
