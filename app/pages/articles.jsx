@@ -1,3 +1,5 @@
+import {Article} from "../components/Article";
+
 const articles = [
       {
         id: 1,
@@ -19,10 +21,12 @@ export default function ArticlesPage(){
     <div>
         <h1>Welcome to the articles page!</h1>
         <ul>
-        {articles.map((article) =>{
+        {articles.map((article) => {
+            return(
                 <li key={article.id}>
-                    <p>{article.title} {article.content}</p>
+                    <Article article={article}/>
                 </li>
+            )
         })}
         </ul>
     </div>

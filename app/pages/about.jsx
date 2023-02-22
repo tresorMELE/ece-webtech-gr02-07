@@ -1,3 +1,7 @@
 export default function AboutPage(){
-    return <div>Welcome to the about page!</div>
+    return (
+        <>
+            <h1>Welcome to the About Page</h1>
+        </>
+    )
 }
