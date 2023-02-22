@@ -6,17 +6,25 @@ Ce projet sert de base aux futurs cours et projets. L'objectif est de créer un 
 
 ## Prérequis
 
-Avant de commencer, assurez-vous que vous avez installé un éditeur de texte ou un IDE, Git, et Node.js.
+Installation d'un éditeur de texte ou un IDE, Git, et Node.js.
 
 ## Étapes
 
-Les étapes ci-dessous pour créer votre projet :
+Les étapes ci-dessous pour utilise l'API :
 
-1. Choisissez un répertoire de travail et créez un dossier de projet.
+Le projet récupère à partir d'un fichier JSON les articles et les affiches.
+### Pour le projet "Hello":
+
+1. lancer dans le terminal: npm run develop pour lancer le serveur
+1. mettre l'url: http://localhost:8080 dans le naviateur pour voir la page ou utiliser Postman.
 2. Initialiser un dépôt Git et un paquet Node.js.
 3. Créer un script Node.js simple.
 4. Créer un serveur HTTP et modifier le fichier index.js.
-5. Intégrer Nodemon et créer une application de base avec plusieurs routes.
-6. Lire à partir d'un fichier JSON et publier le projet sur GitHub ou GitLab.
 
-Il est essentiel de suivre les spécifications des Commits conventionnels pour écrire les messages de commit appropriés. Il est également recommandé d'apprendre les commandes bash CLI de base et de comprendre la documentation officielle des modules http de Node.js.
+#### Pour l'API Articles:
+
+1. Requête POST http://localhost:8080/articles/  + paramètres pour ajouter un article
+1. Requête POST http://localhost:8080/articles/:articleId/comments pour ajouter un commentaire
+1. Requête GET http://localhost:8080/articles/:articleId pour afficher le contenu de l'article via son Id
+1. Requête GET http://localhost:8080/articles/ pour afficher tous les articles
+1. Requête GET http://localhost:8080/articles/:articleId/comments pour afficher les commentaires de l'article via son Id.
