@@ -1,10 +1,13 @@
 # ece-webtech-gr02-07
-# Lab1
+
+## Lab1
 
 Ce projet sert de base aux futurs cours et projets. L'objectif est de créer un script Node.js simple qui peut être utilisé pour créer un serveur HTTP de base, intégrer Nodemon, créer une application de base avec plusieurs routes, et lire à partir d'un fichier JSON. Le projet final sera publié sur GitHub ou GitLab, et la note reflétera le projet livré et son historique Git.
+
 ## Prérequis
 
 Avant de commencer, assurez-vous que vous avez installé un éditeur de texte ou un IDE, Git, et Node.js.
+
 ## Étapes
 
 Les étapes ci-dessous pour créer votre projet :
