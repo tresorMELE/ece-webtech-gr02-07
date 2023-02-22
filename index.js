@@ -105,15 +105,8 @@ app.get('/articles/:articleId', (req, res) => {
 })
 
 app.get('/articles/:articleId/comments', (req, res) => {
-    const comment = db.comments.find( comment => comment.articleId === req.params.articleId)
-    console.log(typeof comment)
-    console.log(Object.keys(comment).length / 5)
-    if (Object.keys(comment).length / 5 > 1){
-        comment.forEach(c => res.send(c.content))
-    }
-    else{
-        res.send(comment)
-    }
+    const comment = db.comments.filter( comment => comment.articleId === req.params.articleId)
+    res.send(comment)
     res.end()
 })
 
@@ -128,6 +121,7 @@ app.post('/articles/:articleId/comments', (req, res) => {
         }
     db.comments.push(comment);
     res.send("New comment added")
+    console.log(db.comments)
     res.end()
 })
 app.get('/articles/:articleId/comments/:commentId', (req, res) => {
